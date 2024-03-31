@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>works</h1>
+    
+</body>
+<script>
+    window.onload = function() {
+    var active = localStorage.getItem('active');
+    if(active != "yes" ) {
+       window.location.href='./login.html';
+    //    localStorage.setItem("active","no");
+    }
+};
+</script>
+</html>

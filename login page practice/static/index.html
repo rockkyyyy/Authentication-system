@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            /* display: flex; */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 50%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            width: 10%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Register</h1>
+    <form id="reg-form"> 
+    <input type="text" autocomplete="off" placeholder="username" id="username"/>
+    <input type="password" placeholder="password" id="password"/>
+    <input type="submit" value="Submit Form"/>
+     </form>
+<a href="/login.html"> click hear to login </a>
+<!-- <iframe width="800" height="600" src="https://www.youtube.com/embed/b91XgdyX-SM" title="Node.js Register and Login Tutorial | Work with MongoDB, JWT and Node" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+     <script>
+        const form=document.getElementById('reg-form');
+        form.addEventListener('submit',registerUser)
+
+        async function registerUser(event){
+            event.preventDefault()
+            const username= document.getElementById('username').value;
+            const password= document.getElementById('password').value;
+
+           const result = await fetch('/api/register' , {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                    username,
+                    password
+                })
+            }).then((res)=> res.json())
+            // console.log(result)
+            if(result.status!='ok'){
+                alert(result.error)
+            }
+            else {
+                alert('registration succesfull')
+            // window.location.href= /login.html ;
+            // Redirect to a different page;
+window.location.href = "/login.html";
+        }
+        }
+     </script>
+</body>
+</html>
